@@ -23,6 +23,8 @@
  */
 package machine;
 
+import machine.DataMemory;
+import machine.CallStack;
 import error.ErrorHandler;
 import org.junit.After;
 import org.junit.Before;

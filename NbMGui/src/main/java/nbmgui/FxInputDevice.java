@@ -1,8 +1,8 @@
 package nbmgui;
 
-import javafx.application.Platform;
 import machine.InputDevice;
 
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
 /**
@@ -12,7 +12,7 @@ public class FxInputDevice implements InputDevice {
 
     private final Controller controller;
 
-    FxInputDevice(Controller controller) {
+    public FxInputDevice(Controller controller) {
         this.controller = controller;
     }
 
@@ -30,17 +30,18 @@ public class FxInputDevice implements InputDevice {
     @Override
     public boolean hasNextInt() {
         waitForInput();
-        return controller.getInput().chars().allMatch(Character::isDigit);
+        return controller.getInput().chars().allMatch( Character::isDigit );
     }
 
     @Override
-    public int nextInt() throws NoSuchElementException {
+    public int nextInt() throws InputMismatchException, NoSuchElementException {
         return Integer.parseInt(controller.getInput());
     }
 
     private void waitForInput() {
         try {
-            Platform.runLater(() -> controller.enableInputView(true));
+            controller.getInputView().setDisable(false);
+            controller.setDebuggerButtonsDisable(true);
             controller.getSemaphore().acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();

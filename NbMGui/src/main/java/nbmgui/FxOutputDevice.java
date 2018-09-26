@@ -1,6 +1,5 @@
 package nbmgui;
 
-import javafx.application.Platform;
 import machine.OutputDevice;
 
 /**
@@ -9,34 +8,30 @@ import machine.OutputDevice;
 public class FxOutputDevice implements OutputDevice {
     private final Controller controller;
 
-    FxOutputDevice(Controller controller) {
+    public FxOutputDevice(Controller controller) {
         this.controller = controller;
     }
 
     @Override
     public void printInt(int value, int columnwidth) {
-        Platform.runLater(() -> controller.getOutputView().appendText(String.format("%" + columnwidth + "d", value)));
+        controller.getOutputView().appendText(String.format("%" + columnwidth + "d", value));
     }
 
     @Override
     public void printChar(char character, int columnwidth) {
-        Platform.runLater(() -> {
-            controller.getOutputView().appendText(String.valueOf(character));
-            outputBlanks(columnwidth-1);
-        });
+        controller.getOutputView().appendText(String.valueOf(character));
+        outputBlanks(columnwidth-1);
     }
 
     @Override
     public void print(String str, int columnwidth) {
-        Platform.runLater(() -> {
-            controller.getOutputView().appendText(str);
-            outputBlanks(columnwidth-str.length());
-        });
+        controller.getOutputView().appendText(str);
+        outputBlanks(columnwidth-str.length());
     }
 
     @Override
     public void println() {
-        Platform.runLater(() -> controller.getOutputView().appendText("\n"));
+        controller.getOutputView().appendText("\n");
     }
 
     private void outputBlanks(int number) {
