@@ -72,7 +72,7 @@ After the constant memory the stack frames are maintained. Whenever a function g
 \caption{Snapshot of a call stack with three frames}\label{fig:threeframes}
 \end{figure}
 
-Figure~\ref{fig:threeframes} shows a pretty good example from \cite{bauer_p._2017}. Here we can see that the memory is working with three frames. Frame~0 starts at address 0. The first 32 bytes of each frame are reserved for administrative data like the static link and the dynamic link to the surrounding frame, the return value, etc. Address~32 holds the value of a local variable in frame~0.
+Figure~\ref{fig:threeframes} shows a pretty good example from \cite{bauer_nobeard_2017}. Here we can see that the memory is working with three frames. Frame~0 starts at address 0. The first 32 bytes of each frame are reserved for administrative data like the static link and the dynamic link to the surrounding frame, the return value, etc. Address~32 holds the value of a local variable in frame~0.
 At address~36 frame~1 starts with the address to its statically surrounding frame, i.e, the function (or unit or block) represented by frame~0 is defining the function (or block) represented by frame~1. Frame~1 defines two local values at addresses 68 and 72. 
 
 \subsection{Call Stack}
